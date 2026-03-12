@@ -1,0 +1,15 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: index
+parts:
+  - caption: 弯管CAE软件
+    chapters:
+      - file: content/Tube_X/弯管CAE软件
+  - caption: AI预测弯管仿真
+    chapters:
+      - file: content/Tube_MGN/MeshGraphNets
+      - file: content/Tube_MGN/PINN
+      - file: content/Tube_MGN/RNN和LSTM
+      - file: content/Tube_MGN/弯管仿真数据

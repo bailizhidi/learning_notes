@@ -34,9 +34,9 @@
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/proof.css?v=b4b7a797" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- So that users can add custom icons -->
@@ -61,6 +61,8 @@
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'content/Tube_MGN/弯管仿真数据';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -386,9 +388,14 @@
 <h1>弯管仿真数据<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
 <section id="id2">
 <h2>数据集计划<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
-<p>首先管子的长度以及弯曲位置，对弯曲和回弹的状态没有影响，可以不考虑。其次是几何方面：弯曲半径，管子厚度和直径，三个变量。可以每个变量取10组数据组合，最终得到1000条轨迹，然后用MeshGraphNets进行训练，测试阶段可以使用更大尺寸的管子，观察模型是否有泛化能力。</p>
-<p>弯曲阶段弯曲角度都取90度，然后弯曲仿真输出90帧，回弹输出两帧。弯曲阶段用MeshGraphNets训练，回弹阶段用线性映射，输出各种场数据。</p>
-<p>管子基准参数：150-0.7-8-24</p>
+<p>首先管子的长度以及弯曲位置，对弯曲和回弹的状态没有影响，可以不考虑。</p>
+<p>其次是几何方面：弯曲半径，管子厚度和直径，三个变量。</p>
+<ul class="simple">
+<li><p>设定参数边界与物理约束确定采样范围：外径 <span class="math notranslate nohighlight">\(D\)</span>：[6.0 mm, 12.0 mm]厚度 <span class="math notranslate nohighlight">\(t\)</span>：[0.4 mm, 1.0 mm]弯曲半径 <span class="math notranslate nohighlight">\(R\)</span>：[18.0 mm, 32.0 mm]</p></li>
+<li><p>设定物理剔除规则 (剔除在 Abaqus 中极难收敛的极端情况)：相对弯曲半径约束：设定 <span class="math notranslate nohighlight">\(R/D \ge 2.0\)</span>。弯曲半径太小会导致外壁严重拉裂。相对壁厚约束：设定 <span class="math notranslate nohighlight">\(t/D \ge 0.05\)</span>。管壁太薄会导致内侧严重起皱失稳。</p></li>
+<li><p>使用 Python 生成采样矩阵，生成 100 个仿真输入参数，使用拉丁超立方抽样（LHS）结合物理约束过滤来生成参数矩阵。</p></li>
+</ul>
+<p>弯曲阶段弯曲角度都取90度，然后弯曲仿真输出90帧，采用等时间间隔输出，每帧变化1度，回弹输出两帧，弯曲结束帧和回弹结束帧。弯曲阶段用MeshGraphNets训练，回弹阶段用线性映射，输出各种场数据。</p>
 </section>
 </section>
 

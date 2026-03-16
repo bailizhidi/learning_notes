@@ -34,9 +34,9 @@
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../../_static/proof.css?v=b4b7a797" />
+    <link rel="stylesheet" type="text/css" href="../../_static/proof.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- So that users can add custom icons -->
@@ -372,6 +372,8 @@
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">1.PINN数学基础</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">2.PINN核心</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">3.PINN物理残差</a></li>
 </ul>
             </nav>
         </div>
@@ -398,6 +400,28 @@
 </ul>
 <p>微分方程本身只定义了一个解的“家族”，而非一个具体的解，则需要初始条件（ICs）和边界条件（BCs），在求解域内部，处处需要遵守物理定律（PDE），在求解域的时空边界上，必须满足特定的约束（ICs和BCs），所以一个明确的物理问题=控制方程（PDE）+定解条件（ICs和BCs）</p>
 <p>张量：本质的定义就是一个多维数组，有更广泛的维度</p>
+</section>
+<section id="id2">
+<h2>2.PINN核心<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<p>纯线性神经网络，深度则失去了意义，所以一定要有非线性的激活函数，才可以有学习复杂模式的能力，对于PINN来说需要平滑的激活函数（tanh或sigmoid）</p>
+<p>损失函数与梯度下降：通过不断调整自身的权重和偏置，来尽可能的降低损失函数给出的差评分。损失函数需要具有可微性和凸性（理想化的概念）。梯度下降：永远朝向最陡的下坡（小批量梯度下降），学习率衰减即下山的步子逐渐变小</p>
+<p>反向传播和自动微分：</p>
+<ul class="simple">
+<li><p>前向传播：数据从输入端流向输出端，沿着计算图构建起一条完整的因果链条，并在终点计算出总误差</p></li>
+<li><p>反向传播：计算梯度，从后往前，逐层地精确的计算出来，并且无重复计算。算法启动，在自动微分这项强大技术的驱动下，沿着刚刚建立的因果链条，反向追溯，应用链式法则，将误差的梯度，高效的逐级分配给网络中的每一个参数</p></li>
+</ul>
+</section>
+<section id="id3">
+<h2>3.PINN物理残差<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<p>概念：将一个微分方程的所有项，都通过代数移项，移动到等号的同一测，让等号的另一侧为0</p>
+<p>反问题：我只有一些稀疏的观测数据点，但PDE中的某个物理参数是未知的</p>
+<p>RAR算法：去问题最严重的地方加强学习（自适应采样）</p>
+<p>输入的归一化，但需将计算空间和世界空间进行转换（链式法则）</p>
+<p>边界条件的软硬约束：</p>
+<ul class="simple">
+<li><p>通过损失函数施加惩罚的方式，我们称为软约束。软约束通用性强，适用于各类边界条件与复杂几何形状，实现简单需要手动调整惩罚系数，实践中最耗时，约束满足仅为近似</p></li>
+<li><p>硬约束精确满足约束条件，边界误差理论为0,无需调整权重参数，收敛速度更快，通用性受限，复杂几何或边界条件下难以构造对应形式，实现复杂度高</p></li>
+</ul>
 </section>
 </section>
 
@@ -468,6 +492,8 @@
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">1.PINN数学基础</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">2.PINN核心</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">3.PINN物理残差</a></li>
 </ul>
   </nav></div>
 

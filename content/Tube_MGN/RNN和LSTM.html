@@ -352,7 +352,9 @@
 <button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
 </button>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -368,6 +370,15 @@
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rnn">1.RNN（递归/循环神经网络）</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lstm">2.LSTM（长短记忆网络）</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -379,6 +390,50 @@
                   
   <section class="tex2jax_ignore mathjax_ignore" id="rnnlstm">
 <h1>RNN和LSTM介绍<a class="headerlink" href="#rnnlstm" title="Link to this heading">#</a></h1>
+<section id="rnn">
+<h2>1.RNN（递归/循环神经网络）<a class="headerlink" href="#rnn" title="Link to this heading">#</a></h2>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../../_images/RNN架构.png"><img alt="../../_images/RNN%E6%9E%B6%E6%9E%84.png" src="../../_images/RNN%E6%9E%B6%E6%9E%84.png" style="width: 700px;" />
+</a>
+</figure>
+<p>最后一步的输出即为我们想要的预测值，对于反向传播，需要从当前层持续向前传播，直至到x0为止</p>
+<p>缺点：信息会越存越多，变得不好，应该适当忘记和保存</p>
+</section>
+<section id="lstm">
+<h2>2.LSTM（长短记忆网络）<a class="headerlink" href="#lstm" title="Link to this heading">#</a></h2>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../../_images/lstm_1.png"><img alt="../../_images/lstm_1.png" src="../../_images/lstm_1.png" style="width: 700px;" />
+</a>
+</figure>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../../_images/lstm_2.png"><img alt="../../_images/lstm_2.png" src="../../_images/lstm_2.png" style="width: 700px;" />
+</a>
+</figure>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../../_images/lstm_3.png"><img alt="../../_images/lstm_3.png" src="../../_images/lstm_3.png" style="width: 700px;" />
+</a>
+</figure>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../../_images/lstm_4.png"><img alt="../../_images/lstm_4.png" src="../../_images/lstm_4.png" style="width: 700px;" />
+</a>
+</figure>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../../_images/lstm_5.png"><img alt="../../_images/lstm_5.png" src="../../_images/lstm_5.png" style="width: 700px;" />
+</a>
+</figure>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../../_images/lstm_6.png"><img alt="../../_images/lstm_6.png" src="../../_images/lstm_6.png" style="width: 700px;" />
+</a>
+</figure>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../../_images/lstm_7.png"><img alt="../../_images/lstm_7.png" src="../../_images/lstm_7.png" style="width: 700px;" />
+</a>
+</figure>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../../_images/lstm_8.png"><img alt="../../_images/lstm_8.png" src="../../_images/lstm_8.png" style="width: 700px;" />
+</a>
+</figure>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -435,6 +490,24 @@
             </div>
             
             
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rnn">1.RNN（递归/循环神经网络）</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lstm">2.LSTM（长短记忆网络）</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

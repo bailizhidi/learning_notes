@@ -30,6 +30,19 @@
 ```
 :::
 
+:::{card}
+:margin: 2
+:class-body: text-center
+:class-header: bg-light text-center
+:link: content/Machine_Learning/机器学习总结.html
+
+**机器学习**
+
+```{image} images/machine_learning.png
+:height: 120
+```
+:::
+
 ::::
 
 

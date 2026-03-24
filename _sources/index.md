@@ -43,6 +43,19 @@
 ```
 :::
 
+:::{card}
+:margin: 2
+:class-body: text-center
+:class-header: bg-light text-center
+:link: content/NVIDIA_PhysicsNeMo/NVIDIA_PhysicsNeMo框架.html
+
+**机器学习**
+
+```{image} images/NVIDIA_PhysicsNeMo框架.png
+:height: 120
+```
+:::
+
 ::::
 
 

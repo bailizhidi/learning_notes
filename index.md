@@ -2,7 +2,7 @@
 
 弯管CAE工业软件的开发以及用AI对弯管弯曲和回弹过程状态的预测。
 
-::::{card-carousel} 3
+::::{grid} 3
 
 :::{card}
 :margin: 2
@@ -49,7 +49,7 @@
 :class-header: bg-light text-center
 :link: content/NVIDIA_PhysicsNeMo/NVIDIA_PhysicsNeMo框架.html
 
-**机器学习**
+**NVIDIA_PhysicsNeMo框架**
 
 ```{image} images/NVIDIA_PhysicsNeMo框架.png
 :height: 120

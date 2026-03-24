@@ -18,4 +18,4 @@ parts:
         - file: content/Machine_Learning/机器学习总结
   - caption: NVIDIA_PhysicsNeMo框架
     chapters:
-        - file: content/NVIDIA_PhysicsNeMo/NVIDIA_PhysicsNeMo框架
+        - file: content/NVIDIA_PhysicsNeMo/NVIDIA_PhysicsNeMo

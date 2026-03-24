@@ -2,7 +2,7 @@
 
 弯管CAE工业软件的开发以及用AI对弯管弯曲和回弹过程状态的预测。
 
-::::{grid} 3
+::::{card-carousel} 3
 
 :::{card}
 :margin: 2

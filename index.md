@@ -47,7 +47,7 @@
 :margin: 2
 :class-body: text-center
 :class-header: bg-light text-center
-:link: content/NVIDIA_PhysicsNeMo/NVIDIA_PhysicsNeMo框架.html
+:link: content/NVIDIA_PhysicsNeMo/NVIDIA_PhysicsNeMo.html
 
 **NVIDIA_PhysicsNeMo框架**
 

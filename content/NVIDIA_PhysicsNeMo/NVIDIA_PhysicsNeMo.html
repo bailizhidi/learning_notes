@@ -355,7 +355,9 @@
 <button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
 </button>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -371,6 +373,23 @@
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">1.概述</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">2.入门</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">2.1系统要求</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">2.2安装</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">3.学习指南</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">3.1训练计划</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -382,6 +401,65 @@
                   
   <section class="tex2jax_ignore mathjax_ignore" id="nvidia-physicsnemo">
 <h1>NVIDIA_PhysicsNeMo框架<a class="headerlink" href="#nvidia-physicsnemo" title="Link to this heading">#</a></h1>
+<section id="id1">
+<h2>1.概述<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<p>NVIDIA PhysicsNeMo是一个开源深度学习框架，它使用最先进的SciML方法构建、训练、微调和推理物理AI模型，用于AI4science和工程领域。</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>成分</p></th>
+<th class="head"><p>描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">physicsnemo.models</span></code></p></td>
+<td><p>一系列经过优化、可定制且易于使用的模型架构，例如神经算子、图神经网络、扩散模型、Transformer 模型等等。</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">physicsnemo.datapipes</span></code></p></td>
+<td><p>经过优化且可扩展的内置数据管道，可精细处理点云、网格等工程和科学数据结构。</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">physicsnemo.distributed</span></code></p></td>
+<td><p>基于分布式计算子模块构建，使用 <code class="docutils literal notranslate"><span class="pre">torch.distributed</span></code> 只需几个步骤即可实现并行训练。</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">physicsnemo.curator</span></code></p></td>
+<td><p>用于简化和加速工程数据集数据整理过程的子模块。</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">physicsnemo.sym.geometry</span></code></p></td>
+<td><p>一个用于处理深度学习训练几何体的子模块，使用构造实体几何建模和 STL 格式的 CAD 文件。</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">physicsnemo.sym.eq</span></code></p></td>
+<td><p>一个用于在深度学习训练中使用偏微分方程的子模块，其中包含几种常用方程的实现方式以及简单的自定义方法。</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="id2">
+<h2>2.入门<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<section id="id3">
+<h3>2.1系统要求<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Ubuntu 24.04</p></li>
+<li><p>pip与本地 PyTorch 安装兼容的 NVIDIA 驱动程序</p></li>
+<li><p>Python 版本 &gt;= 3.10</p></li>
+</ul>
+</section>
+<section id="id4">
+<h3>2.2安装<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<p>我自己用的是PhysicsNeMo与uv，对于开发或运行存储库中的示例，可以使用uv克隆并安装依赖项：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/NVIDIA/physicsnemo.git
+<span class="nb">cd</span><span class="w"> </span>physicsnemo
+uv<span class="w"> </span>sync<span class="w"> </span>--extra<span class="w"> </span>cu13
+uv<span class="w"> </span>run<span class="w"> </span>python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;import physicsnemo; print(&#39;PhysicsNeMo version:&#39;, physicsnemo.__version__)&quot;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="id5">
+<h2>3.学习指南<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
+<section id="id6">
+<h3>3.1训练计划<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -429,6 +507,32 @@
             </div>
             
             
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">1.概述</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">2.入门</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">2.1系统要求</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">2.2安装</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">3.学习指南</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">3.1训练计划</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

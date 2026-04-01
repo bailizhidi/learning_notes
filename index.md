@@ -56,6 +56,19 @@
 ```
 :::
 
+:::{card}
+:margin: 2
+:class-body: text-center
+:class-header: bg-light text-center
+:link: content/C++_Learning/C_Learning.html
+
+**C++**
+
+```{image} images/C++.png
+:height: 120
+```
+:::
+
 ::::
 
 

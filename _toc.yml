@@ -19,3 +19,6 @@ parts:
   - caption: NVIDIA_PhysicsNeMo框架
     chapters:
         - file: content/NVIDIA_PhysicsNeMo/NVIDIA_PhysicsNeMo
+  - caption: C++学习
+    chapters:
+        - file: content/C++_Learning/C_Learning

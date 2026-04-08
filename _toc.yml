@@ -13,6 +13,7 @@ parts:
       - file: content/Tube_MGN/PINN
       - file: content/Tube_MGN/RNN和LSTM
       - file: content/Tube_MGN/弯管仿真数据
+      - file: content/Tube_MGN/总结
   - caption: 机器学习
     chapters:
         - file: content/Machine_Learning/机器学习总结

@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>RNN和LSTM介绍 &#8212; 学习笔记</title>
+    <title>技术总结 &#8212; 学习笔记</title>
   
   
   
@@ -61,11 +61,13 @@
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'content/Tube_MGN/RNN和LSTM';</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/Tube_MGN/总结';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="弯管仿真数据" href="%E5%BC%AF%E7%AE%A1%E4%BB%BF%E7%9C%9F%E6%95%B0%E6%8D%AE.html" />
-    <link rel="prev" title="PINN介绍" href="PINN.html" />
+    <link rel="next" title="机器学习总结" href="../Machine_Learning/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93.html" />
+    <link rel="prev" title="弯管仿真数据" href="%E5%BC%AF%E7%AE%A1%E4%BB%BF%E7%9C%9F%E6%95%B0%E6%8D%AE.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -177,9 +179,9 @@
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="MeshGraphNets.html">MeshGraphNets论文解读</a></li>
 <li class="toctree-l1"><a class="reference internal" href="PINN.html">PINN介绍</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">RNN和LSTM介绍</a></li>
+<li class="toctree-l1"><a class="reference internal" href="RNN%E5%92%8CLSTM.html">RNN和LSTM介绍</a></li>
 <li class="toctree-l1"><a class="reference internal" href="%E5%BC%AF%E7%AE%A1%E4%BB%BF%E7%9C%9F%E6%95%B0%E6%8D%AE.html">弯管仿真数据</a></li>
-<li class="toctree-l1"><a class="reference internal" href="%E6%80%BB%E7%BB%93.html">技术总结</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">技术总结</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">机器学习</span></p>
 <ul class="nav bd-sidenav">
@@ -268,7 +270,7 @@
       
       
       
-      <li><a href="https://github.com/bailizhidi/learning_notes/issues/new?title=Issue%20on%20page%20%2Fcontent/Tube_MGN/RNN和LSTM.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/bailizhidi/learning_notes/issues/new?title=Issue%20on%20page%20%2Fcontent/Tube_MGN/总结.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -298,7 +300,7 @@
       
       
       
-      <li><a href="../../_sources/content/Tube_MGN/RNN和LSTM.md" target="_blank"
+      <li><a href="../../_sources/content/Tube_MGN/总结.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -374,7 +376,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>RNN和LSTM介绍</h1>
+    <h1>技术总结</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -384,8 +386,15 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rnn">1.RNN（递归/循环神经网络）</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lstm">2.LSTM（长短记忆网络）</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#meshgraphnets-mgn">1 MeshGraphNets (MGN) 核心思路</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">2 算法架构演进</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">3 结果分析</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#v1">v1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#v2">v2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#v3">v3</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">4 后续计划</a></li>
 </ul>
             </nav>
         </div>
@@ -397,51 +406,120 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="rnnlstm">
-<h1>RNN和LSTM介绍<a class="headerlink" href="#rnnlstm" title="Link to this heading">#</a></h1>
-<section id="rnn">
-<h2>1.RNN（递归/循环神经网络）<a class="headerlink" href="#rnn" title="Link to this heading">#</a></h2>
-<figure class="align-center">
-<a class="reference internal image-reference" href="../../_images/RNN架构.png"><img alt="../../_images/RNN%E6%9E%B6%E6%9E%84.png" src="../../_images/RNN%E6%9E%B6%E6%9E%84.png" style="width: 700px;" />
-</a>
-</figure>
-<p>最后一步的输出即为我们想要的预测值，对于反向传播，需要从当前层持续向前传播，直至到x0为止</p>
-<p>缺点：信息会越存越多，变得不好，应该适当忘记和保存</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>技术总结<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<section id="meshgraphnets-mgn">
+<h2>1 MeshGraphNets (MGN) 核心思路<a class="headerlink" href="#meshgraphnets-mgn" title="Link to this heading">#</a></h2>
+<p>MGN 是 DeepMind 提出的一种用于模拟复杂物理系统的图神经网络架构，核心思想“将连续的介质（如流体或固体）离散化为图网络拓扑，通过节点间的局部消息传递，来隐式地求解复杂的物理相互作用。”。</p>
+<p>它包含三个核心组件（Encode-Process-Decode 范式）：</p>
+<ul class="simple">
+<li><p>Encoder（编码器 - 升维提取）： 它将物理空间中的网格节点特征（如节点的三维坐标、历史速度、节点类型等）和连边特征（如节点间的相对距离、相对位移）映射到一个高维的隐空间（Latent Space）。在隐空间中，神经网络更容易捕捉非线性的物理关系。</p></li>
+<li><p>Processor（处理器 - 隐式求解）： 这是 MGN 的“大脑”。通过多层 Message Passing（消息传递），相邻的节点开始交换信息。这里它实际上在学习什么？ 传统 CAE 是通过刚度矩阵来传递力，而 Processor 是在通过数据驱动的方式，学习如何用多层感知机（MLP）去近似空间偏微分方程（PDE）的微分算子。它在学习“节点 A 移动了，应该给相连的节点 B 施加多大的拉力或推力”。</p></li>
+<li><p>Decoder（解码器 - 降维输出）： 将高维隐特征重新映射回三维物理空间，输出当前时间步下，每个节点应该产生的加速度或速度变化量。最后，通过半隐式欧拉积分等数值方法，更新节点位置，完成时空推演（Rollout）。</p></li>
+</ul>
+<p>模型表现与效果，在理想状态下，原生 MGN 展现出了极具诱惑力的优势：</p>
+<ul class="simple">
+<li><p>极速推理： 一旦训练完成，它的推演速度比传统基于有限元的 Abaqus/Ansys 等工业软件快几个数量级。</p></li>
+<li><p>长序列动画生成： 它可以像自回归模型（类似于 ChatGPT 生成文本那样，用上一步预测下一步）一样，连续推演几十甚至上百个时间步，生成流畅的物理动画。</p></li>
+</ul>
+<p>原生 MGN 的局限性： 原生 MGN 是纯数据驱动的，它只知道“点在这个位置，按照历史惯性该往哪飞”，它不理解什么是管径、什么是厚度，更不知道什么是胡克定律。因此，面对复杂弯管的泛化时，极易崩溃。</p>
 </section>
-<section id="lstm">
-<h2>2.LSTM（长短记忆网络）<a class="headerlink" href="#lstm" title="Link to this heading">#</a></h2>
-<figure class="align-center">
-<a class="reference internal image-reference" href="../../_images/lstm_1.png"><img alt="../../_images/lstm_1.png" src="../../_images/lstm_1.png" style="width: 700px;" />
+<section id="id2">
+<h2>2 算法架构演进<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>V1：基线：沿用了 DeepMind 原版 MeshGraphNets 的标准配置。在这个阶段，每个图节点的输入特征极其贫乏，仅为一个 4 维向量：[节点类型, X, Y, Z三维坐标]。但缺乏局部参考系： 对于网络而言，外壁的节点和内壁的节点除了绝对坐标不同，没有任何区别。网络无法感知“当前处于一个外径为 <span class="math notranslate nohighlight">\(D\)</span>、壁厚为 <span class="math notranslate nohighlight">\(t\)</span> 的管子上”。流于表面的插值： 在同分布测试中，它能勉强拟合。但一旦进入分布外（OOD）泛化测试——由于特征维度过低，网络无法建立边界刚度矩阵的概念，导致推演中频繁出现体积坍缩、网格严重穿透，甚至在几十步推演后彻底发散崩溃。</p></li>
+<li><p>V2：特征工程 —— 几何感知的核心 (7 维物理)： 为了打破 V1 的几何盲区，进行了一次大胆的特征工程重构。将节点的输入特征从 4 维强行扩充到了 7 维。我们计算并注入了：绝对管径 (<span class="math notranslate nohighlight">\(Radius\)</span>)： 让网络拥有宏观尺寸的先验知识。截面横纵向距离 (<span class="math notranslate nohighlight">\(dist\_A, dist\_B\)</span>)：这相当于为每个节点建立了一个随动的局部极坐标系。网络终于能区分“我是处于容易起皱的内凹面，还是容易变薄的外凸面”。加上这 3 个几何特征后，网络发生了质的飞跃。在没有任何力学公式约束的情况下，仅仅依靠高维数据表征，网络就能在长达 90 步的时空推演中，完美复刻出极度平滑、无穿透的弯管动画！但是深层残留隐患： 几何上的完美掩盖了物理上的失真。当提取 V2 预测的微观应力云图时，发现了大量的不合理应力。应力分布极其噪点化，同一点的应变极小，但预测应力却高达几百兆帕——这严重违反了连续介质力学的本构定律。V2 证明了我们在数据表征上的巨大成功，但也暴露了纯黑盒模型的上限：它学会了“画”出一个弯管，但它不懂物理。</p></li>
+<li><p>V3：算力重分配 —— 欧拉动态空间注意力机制： 弯管成形是一个在空间上极度不均匀的物理过程。为了解决这个问题，提出了 Eulerian Spatial Attention（欧拉空间注意力机制）。因为模具在空间中的位置是固定的（弯曲点永远在 <span class="math notranslate nohighlight">\(Z \le 0\)</span>）。因此我们的注意力机制不绑定在随波逐流的材料点上，而是锚定在绝对空间坐标上。直管段（<span class="math notranslate nohighlight">\(Z &gt; 0\)</span>）： 这里只发生刚体平移。在早期版本中，为了让网络不关注这里，给它赋了 <span class="math notranslate nohighlight">\(0.01\)</span> 的极低权重。但结果导致了高频的数值震荡。在最终版中，我们将直管段的 Loss 权重死死锁定为 <span class="math notranslate nohighlight">\(1.0\)</span>。这在网络中相当于施加了一个强有力的刚性边界条件约束，消灭了虚假应变。弯曲核心区（<span class="math notranslate nohighlight">\(Z \le 0\)</span>）： 这里发生着横截面畸变、壁厚减薄、内侧起皱等极端非线性大变形。我们将其 Loss 权重提升至 <span class="math notranslate nohighlight">\(2.0\)</span>，强迫神经网络的优化器把宝贵的梯度算力全部倾注在这一区域。改写 Loss 函数的拓扑权重，让 AI 的注意力与工程力学的难点对齐。</p></li>
+<li><p>V4：第一性原理约束 (PINN)： 在V3稳固的几何地基上，引入了双线性弹塑性本构物理约束。让网络不仅要“拟合数据”，更要“服从真理”。在图网络的消息传递过程中，我们提取相邻节点间的距离变化率（预测应变 <span class="math notranslate nohighlight">\(\epsilon\)</span>），代入材料的真实弹性模量 (<span class="math notranslate nohighlight">\(E\)</span>)、屈服应力 (<span class="math notranslate nohighlight">\(\sigma_y\)</span>) 和切线模量 (<span class="math notranslate nohighlight">\(E_t\)</span>)，计算出理论应力 (<span class="math notranslate nohighlight">\(\sigma_{theory}\)</span>)，并用它去惩罚网络预测的应力。</p>
+<ul>
+<li><p>归一化物理空间降维：真实的弹性模量高达 <span class="math notranslate nohighlight">\(10^5\)</span> 兆帕级，而神经网络的归一化隐特征在 <span class="math notranslate nohighlight">\([-1, 1]\)</span> 之间。直接计算 Loss 会引发灾难级的梯度爆炸。我放弃了用魔法数字（如乘以 <span class="math notranslate nohighlight">\(1e-5\)</span>）去硬凑，而是将算出的真实物理应力，利用数据集的全局均值和方差，反向缩小回归一化空间，在这个纯净的无量纲空间内进行 MSE 计算。这保证了所有梯度始终在完美的数量级内流动。</p></li>
+<li><p>物理法则预热机制：PINN 极其难以收敛！在训练初期（Epoch 0），网络连管子的基本形状都猜不对，算出的应变全是垃圾。拿着垃圾去强加物理约束，会导致极其剧烈的梯度撕裂。所以提出“先学几何，再受物理约束”的动态策略。前 100 轮，物理 Loss 权重从 <span class="math notranslate nohighlight">\(0\)</span> 缓慢线性增长到 <span class="math notranslate nohighlight">\(1.0\)</span>。这允许网络先专心拟合出一个粗略的流形面，随后让物理法则入场，精细化消灭掉所有的幽灵应力。V4 打通“几何表征 + 数据驱动 + 第一性原理”的闭环，实现了从黑盒插值向微观动力学推理跨越。</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="id3">
+<h2>3 结果分析<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<section id="v1">
+<h3>v1<a class="headerlink" href="#v1" title="Link to this heading">#</a></h3>
+<figure class="align-center" id="id5">
+<a class="reference internal image-reference" href="../../_images/v1_1.png"><img alt="../../_images/v1_1.png" src="../../_images/v1_1.png" style="width: 700px;" />
 </a>
+<figcaption>
+<p><span class="caption-number">Fig. 8 </span><span class="caption-text">IID测试-位移误差</span><a class="headerlink" href="#id5" title="Link to this image">#</a></p>
+</figcaption>
 </figure>
-<figure class="align-center">
-<a class="reference internal image-reference" href="../../_images/lstm_2.png"><img alt="../../_images/lstm_2.png" src="../../_images/lstm_2.png" style="width: 700px;" />
+<figure class="align-center" id="id6">
+<a class="reference internal image-reference" href="../../_images/v1_2.png"><img alt="../../_images/v1_2.png" src="../../_images/v1_2.png" style="width: 700px;" />
 </a>
+<figcaption>
+<p><span class="caption-number">Fig. 9 </span><span class="caption-text">OOD测试-位移误差</span><a class="headerlink" href="#id6" title="Link to this image">#</a></p>
+</figcaption>
 </figure>
-<figure class="align-center">
-<a class="reference internal image-reference" href="../../_images/lstm_3.png"><img alt="../../_images/lstm_3.png" src="../../_images/lstm_3.png" style="width: 700px;" />
+<figure class="align-center" id="id7">
+<a class="reference internal image-reference" href="../../_images/v1_3.png"><img alt="../../_images/v1_3.png" src="../../_images/v1_3.png" style="width: 700px;" />
 </a>
+<figcaption>
+<p><span class="caption-number">Fig. 10 </span><span class="caption-text">loss曲线</span><a class="headerlink" href="#id7" title="Link to this image">#</a></p>
+</figcaption>
 </figure>
-<figure class="align-center">
-<a class="reference internal image-reference" href="../../_images/lstm_4.png"><img alt="../../_images/lstm_4.png" src="../../_images/lstm_4.png" style="width: 700px;" />
+</section>
+<section id="v2">
+<h3>v2<a class="headerlink" href="#v2" title="Link to this heading">#</a></h3>
+<figure class="align-center" id="id8">
+<a class="reference internal image-reference" href="../../_images/v2_1.png"><img alt="../../_images/v2_1.png" src="../../_images/v2_1.png" style="width: 700px;" />
 </a>
+<figcaption>
+<p><span class="caption-number">Fig. 11 </span><span class="caption-text">IID测试-位移误差</span><a class="headerlink" href="#id8" title="Link to this image">#</a></p>
+</figcaption>
 </figure>
-<figure class="align-center">
-<a class="reference internal image-reference" href="../../_images/lstm_5.png"><img alt="../../_images/lstm_5.png" src="../../_images/lstm_5.png" style="width: 700px;" />
+<figure class="align-center" id="id9">
+<a class="reference internal image-reference" href="../../_images/v2_2.png"><img alt="../../_images/v2_2.png" src="../../_images/v2_2.png" style="width: 700px;" />
 </a>
+<figcaption>
+<p><span class="caption-number">Fig. 12 </span><span class="caption-text">OOD测试-位移误差</span><a class="headerlink" href="#id9" title="Link to this image">#</a></p>
+</figcaption>
 </figure>
-<figure class="align-center">
-<a class="reference internal image-reference" href="../../_images/lstm_6.png"><img alt="../../_images/lstm_6.png" src="../../_images/lstm_6.png" style="width: 700px;" />
+<figure class="align-center" id="id10">
+<a class="reference internal image-reference" href="../../_images/v2_3.png"><img alt="../../_images/v2_3.png" src="../../_images/v2_3.png" style="width: 700px;" />
 </a>
+<figcaption>
+<p><span class="caption-number">Fig. 13 </span><span class="caption-text">loss曲线</span><a class="headerlink" href="#id10" title="Link to this image">#</a></p>
+</figcaption>
 </figure>
-<figure class="align-center">
-<a class="reference internal image-reference" href="../../_images/lstm_7.png"><img alt="../../_images/lstm_7.png" src="../../_images/lstm_7.png" style="width: 700px;" />
+</section>
+<section id="v3">
+<h3>v3<a class="headerlink" href="#v3" title="Link to this heading">#</a></h3>
+<figure class="align-center" id="id11">
+<a class="reference internal image-reference" href="../../_images/v3_1.png"><img alt="../../_images/v3_1.png" src="../../_images/v3_1.png" style="width: 700px;" />
 </a>
+<figcaption>
+<p><span class="caption-number">Fig. 14 </span><span class="caption-text">IID测试-位移误差</span><a class="headerlink" href="#id11" title="Link to this image">#</a></p>
+</figcaption>
 </figure>
-<figure class="align-center">
-<a class="reference internal image-reference" href="../../_images/lstm_8.png"><img alt="../../_images/lstm_8.png" src="../../_images/lstm_8.png" style="width: 700px;" />
+<figure class="align-center" id="id12">
+<a class="reference internal image-reference" href="../../_images/v3_2.png"><img alt="../../_images/v3_2.png" src="../../_images/v3_2.png" style="width: 700px;" />
 </a>
+<figcaption>
+<p><span class="caption-number">Fig. 15 </span><span class="caption-text">OOD测试-位移误差</span><a class="headerlink" href="#id12" title="Link to this image">#</a></p>
+</figcaption>
 </figure>
+<figure class="align-center" id="id13">
+<a class="reference internal image-reference" href="../../_images/v3_3.png"><img alt="../../_images/v3_3.png" src="../../_images/v3_3.png" style="width: 700px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 16 </span><span class="caption-text">loss曲线</span><a class="headerlink" href="#id13" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="id4">
+<h2>4 后续计划<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>1.等待v4版本训练完成，观察应力误差</p></li>
+<li><p>2.泛化测试1，重新仿真三组与训练集差别较大的弯管，观察预测精度</p></li>
+<li><p>3.泛化测试2，弯曲一块板，用训练出来的权重去预测，观察预测精度</p></li>
+</ul>
 </section>
 </section>
 
@@ -476,20 +554,20 @@
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="PINN.html"
+       href="%E5%BC%AF%E7%AE%A1%E4%BB%BF%E7%9C%9F%E6%95%B0%E6%8D%AE.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">PINN介绍</p>
+        <p class="prev-next-title">弯管仿真数据</p>
       </div>
     </a>
     <a class="right-next"
-       href="%E5%BC%AF%E7%AE%A1%E4%BB%BF%E7%9C%9F%E6%95%B0%E6%8D%AE.html"
+       href="../Machine_Learning/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">弯管仿真数据</p>
+        <p class="prev-next-title">机器学习总结</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -511,8 +589,15 @@
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rnn">1.RNN（递归/循环神经网络）</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lstm">2.LSTM（长短记忆网络）</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#meshgraphnets-mgn">1 MeshGraphNets (MGN) 核心思路</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">2 算法架构演进</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">3 结果分析</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#v1">v1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#v2">v2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#v3">v3</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">4 后续计划</a></li>
 </ul>
   </nav></div>
 
